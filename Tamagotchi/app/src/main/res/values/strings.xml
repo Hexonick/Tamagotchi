@@ -4,4 +4,8 @@
     <string name="btnJouer">Jouer</string>
     <string name="btnQuitter">Quitter</string>
     <string name="txtPseudo">Pseudo</string>
+    <string name="etxtPseudo">Pseudo</string>
+    <string name="etxtPassword">Password</string>
+    <string name="btnRetour">Retour</string>
+    <string name="btnCreate">Create</string>
 </resources>
