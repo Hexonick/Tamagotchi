@@ -7,5 +7,15 @@
     <string name="etxtPseudo">Pseudo</string>
     <string name="etxtPassword">Password</string>
     <string name="btnRetour">Retour</string>
-    <string name="btnCreate">Create</string>
+    <string name="btnCreate">Creer</string>
+    <string name="txtMonster">Monstres</string>
+    <string name="btnMonster1">Vide</string>
+    <string name="btnMonster2">Lvl:10</string>
+    <string name="btnMonster3">Lvl:50</string>
+    <string name="btnMonster4">Lvl:100</string>
+    <string name="txtEggs">Oeufs</string>
+    <string name="txtEggsName">Nom:</string>
+    <string name="btnOeuf1">Oeuf</string>
+    <string name="diaChoisir">Choisir</string>
+    <string name="diaCancel">Annuler</string>
 </resources>

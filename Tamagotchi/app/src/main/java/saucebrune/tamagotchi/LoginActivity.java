@@ -3,6 +3,7 @@ package saucebrune.tamagotchi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,13 +21,16 @@ public class LoginActivity extends Activity{
     }
 
     public void onClickCreate(View button){
+        Log.w("onClickCreate()","onClickCreate()");
         if(valide()){
+            Log.w("valide()","valide()");
             EditText pseudo = (EditText)findViewById(R.id.etxtPseudo);
             EditText password = (EditText)findViewById(R.id.etxtPassword);
             Intent create = new Intent(this,MainActivity.class);
             create.putExtra("etxtPseudo",pseudo.getText().toString());
-            create.putExtra("etxtPassword",password.getText().toString());
+            //create.putExtra("etxtPassword",password.getText().toString());
             setResult(Activity.RESULT_OK,create);
+            Log.w("finish()","finish()");
             finish();
         }
     }
