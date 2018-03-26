@@ -8,6 +8,9 @@
     android:padding="75dp"
     tools:context="saucebrune.tamagotchi.MainActivity">
 
+    <!-- Ajouter toutes les table layout avec les imgaes et les metre
+    visibility:gone -->
+
     <TextView
         android:id="@+id/txtMonster"
         android:layout_width="match_parent"

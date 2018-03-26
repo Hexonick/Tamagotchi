@@ -36,11 +36,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                Intent resultat = getIntent();
-                Uri info = resultat.getData();
+                String info = data.getStringExtra("etxtPseudo");
                 TextView pseudo = (TextView) findViewById(R.id.txtPseudo);
                 Button btnJouer = (Button)findViewById(R.id.btnJouer);
-                btnJouer.isEnabled();
+                btnJouer.setEnabled(true);
                 pseudo.setAlpha(1);
                 pseudo.setText(info.toString());
             }
