@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class MonsterList extends AppCompatActivity{
@@ -29,8 +30,36 @@ public class MonsterList extends AppCompatActivity{
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 String nom = data.getStringExtra("nom");
-                TextView pseudo = (TextView) findViewById(R.id.txtPseudo);
-                Button btnJouer = (Button)findViewById(R.id.btnJouer);
+                TextView nomMonstre = null;
+                TableLayout table = null;
+                Button btnJouer = null;
+                String btn = data.getStringExtra("id");
+                int id = Integer.valueOf(btn);
+                switch(id){
+                    case R.id.btnMonster1:
+                        nomMonstre = (TextView) findViewById(R.id.nomMonstre1);
+                        table = (TableLayout) findViewById(R.id.tblMonstre1);
+                        btnJouer = (Button)findViewById(R.id.btnMonster1);
+                        break;
+                    case R.id.btnMonster2:
+                        nomMonstre = (TextView) findViewById(R.id.nomMonstre2);
+                        table = (TableLayout) findViewById(R.id.tblMonstre2);
+                        btnJouer = (Button)findViewById(R.id.btnMonster2);
+                        break;
+                    case R.id.btnMonster3:
+                        nomMonstre = (TextView) findViewById(R.id.nomMonstre3);
+                        table = (TableLayout) findViewById(R.id.tblMonstre3);
+                        btnJouer = (Button)findViewById(R.id.btnMonster3);
+                        break;
+                    case R.id.btnMonster4:
+                        nomMonstre = (TextView) findViewById(R.id.nomMonstre4);
+                        table = (TableLayout) findViewById(R.id.tblMonstre4);
+                        btnJouer = (Button)findViewById(R.id.btnMonster4);
+                        break;
+                }
+                nomMonstre.setText(nom);
+                btnJouer.setVisibility(View.GONE);
+                table.setVisibility(View.VISIBLE);
             }
         }
     }

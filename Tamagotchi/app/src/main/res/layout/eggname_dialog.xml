@@ -24,6 +24,6 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:textAlignment="center"
-        android:hint="@string/txtPseudo"/>
+        android:hint="@string/txtNomMonstre"/>
 
 </LinearLayout>

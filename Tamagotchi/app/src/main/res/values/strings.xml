@@ -18,4 +18,9 @@
     <string name="btnOeuf1">Oeuf</string>
     <string name="diaChoisir">Choisir</string>
     <string name="diaCancel">Annuler</string>
+    <string name="txtNomMonstre"></string>
+    <string name="txtMonstre1">Monstre 1</string>
+    <string name="txtMonstre2">Monstre 2</string>
+    <string name="txtMonstre3">Monstre 3</string>
+    <string name="txtMonstre4">Monstre 4</string>
 </resources>

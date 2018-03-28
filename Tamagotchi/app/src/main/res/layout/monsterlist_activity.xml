@@ -28,6 +28,24 @@
         android:text="@string/btnMonster1"
         android:onClick="onClickChooseMonster"/>
 
+    <TableLayout
+        android:id="@+id/tblMonstre1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/nomMonstre1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingTop="6dp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:text="@string/txtMonstre1"
+            android:background="@drawable/border"/>
+    </TableLayout>
+
     <Button
         android:id="@+id/btnMonster2"
         android:layout_width="match_parent"
@@ -36,6 +54,24 @@
         android:text="@string/btnMonster2"
         android:enabled="false"
         android:onClick="onClickChooseMonster"/>
+
+    <TableLayout
+        android:id="@+id/tblMonstre2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/nomMonstre2"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingTop="6dp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:text="@string/txtMonstre2"
+            android:background="@drawable/border"/>
+    </TableLayout>
 
     <Button
         android:id="@+id/btnMonster3"
@@ -46,6 +82,24 @@
         android:enabled="false"
         android:onClick="onClickChooseMonster"/>
 
+    <TableLayout
+        android:id="@+id/tblMonstre3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/nomMonstre3"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingTop="6dp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:text="@string/txtMonstre3"
+            android:background="@drawable/border"/>
+    </TableLayout>
+
     <Button
         android:id="@+id/btnMonster4"
         android:layout_width="match_parent"
@@ -54,6 +108,24 @@
         android:text="@string/btnMonster4"
         android:enabled="false"
         android:onClick="onClickChooseMonster"/>
+
+    <TableLayout
+        android:id="@+id/tblMonstre4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/nomMonstre4"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingTop="6dp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:text="@string/txtMonstre4"
+            android:background="@drawable/border"/>
+    </TableLayout>
 
     <Button
         android:id="@+id/btnRetour"

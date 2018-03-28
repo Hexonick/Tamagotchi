@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 Button btnJouer = (Button)findViewById(R.id.btnJouer);
                 btnJouer.setEnabled(true);
                 pseudo.setAlpha(1);
-                pseudo.setText(info.toString());
+                pseudo.setText(info);
             }
         }
     }
