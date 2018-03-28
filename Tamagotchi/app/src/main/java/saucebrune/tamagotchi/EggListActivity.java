@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class EggListActivity extends AppCompatActivity{
@@ -22,9 +23,10 @@ public class EggListActivity extends AppCompatActivity{
 
     public void onClickChooseEgg(View button){
         final boolean[] variable = {false};
+        //ViewGroup parent = new (Viewgroup)findViewById(R.layout.egglist_activity);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.eggname_dialog,null))
+        builder.setView(inflater.inflate(R.layout.eggname_dialog, null))
                 .setPositiveButton(R.string.diaChoisir, new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface button, int id){
             EditText edit = (EditText)findViewById(R.id.diaNom);
