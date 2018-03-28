@@ -16,23 +16,21 @@ public class LoginActivity extends Activity{
         setContentView(R.layout.login_activity);
     }
 
-    public void onClickEnregistrer(View button){
-
+    public void onClickLogin(View button){
+        /* Apres avoir lier la BD, valider les informations de l'utilisateur */
     }
 
     public void onClickCreate(View button){
-        Log.w("onClickCreate()","onClickCreate()");
         if(valide()){
-            Log.w("valide()","valide()");
             EditText pseudo = (EditText)findViewById(R.id.etxtPseudo);
             EditText password = (EditText)findViewById(R.id.etxtPassword);
             Intent create = new Intent(this,MainActivity.class);
             create.putExtra("etxtPseudo",pseudo.getText().toString());
             //create.putExtra("etxtPassword",password.getText().toString());
             setResult(Activity.RESULT_OK,create);
-            Log.w("finish()","finish()");
             finish();
         }
+        /* Ajouter une validation sur les informations pour savoir s'ils sont déja dans la BD ou non */
     }
 
     public void onClickRetour(View button){ finish(); }

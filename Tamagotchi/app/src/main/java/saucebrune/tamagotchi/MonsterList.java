@@ -1,5 +1,6 @@
 package saucebrune.tamagotchi;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
 public class MonsterList extends AppCompatActivity{
     private static final int REQUEST_CODE = 1;
@@ -20,6 +23,7 @@ public class MonsterList extends AppCompatActivity{
     public void onClickChooseMonster(View button){
         Intent list = new Intent(this,EggListActivity.class);
         list.putExtra("id",button.getId());
+        PendingIntent pIntent = PendingIntent.getActivities(this,REQUEST_CODE,list,FLAG_CANCEL_CURRENT);
         startActivityForResult(list,REQUEST_CODE);
     }
 

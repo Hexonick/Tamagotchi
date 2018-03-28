@@ -18,12 +18,12 @@
         android:text="@string/txtEggsName"/>
 
     <EditText
-        android:id="@+id/diaNom"
+        android:id="@+id/etxtNom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:textAlignment="center"
-        android:hint="@string/txtNomMonstre"/>
+        android:hint="@string/etxtNomMonstre"/>
 
 </LinearLayout>

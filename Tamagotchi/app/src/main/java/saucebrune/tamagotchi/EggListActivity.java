@@ -1,6 +1,7 @@
 package saucebrune.tamagotchi;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,25 +23,26 @@ public class EggListActivity extends AppCompatActivity{
     }
 
     public void onClickChooseEgg(View button){
-        final boolean[] variable = {false};
-        //ViewGroup parent = new (Viewgroup)findViewById(R.layout.egglist_activity);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.eggname_dialog, null))
                 .setPositiveButton(R.string.diaChoisir, new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface button, int id){
-            EditText edit = (EditText)findViewById(R.id.diaNom);
+            Dialog dialogView = (Dialog) button;
+            EditText edit = (EditText)dialogView.findViewById(R.id.etxtNom);
             intent.putExtra("nom",edit.getText().toString());
             setResult(Activity.RESULT_OK,intent);
-            variable[0] = true;
+            sendIntent();
         }})
                 .setNegativeButton(R.string.diaCancel,new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface button, int id){
                button.cancel();
         }});
         builder.show();
-        if(variable[0])
-        {finish();}
+    }
+
+    public void sendIntent(){
+        finish();
     }
 
     public void onClickRetour(View button){ finish(); }
