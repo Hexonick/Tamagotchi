@@ -14,12 +14,13 @@ import android.widget.EditText;
 
 public class EggListActivity extends AppCompatActivity{
 
-    public Intent intent = null;
+    public Intent intent = new Intent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.egglist_activity);
-        intent = getIntent();
+        String button = getIntent().getStringExtra("id");
+        intent.putExtra("id",button);
     }
 
     public void onClickChooseEgg(View button){

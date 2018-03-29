@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
@@ -22,12 +23,17 @@ public class MonsterList extends AppCompatActivity{
 
     public void onClickChooseMonster(View button){
         Intent list = new Intent(this,EggListActivity.class);
-        list.putExtra("id",button.getId());
-        PendingIntent pIntent = PendingIntent.getActivities(this,REQUEST_CODE,list,FLAG_CANCEL_CURRENT);
+        String bouton = String.valueOf(button.getId());
+        list.putExtra("id",bouton);
         startActivityForResult(list,REQUEST_CODE);
     }
 
     public void onClickRetour(View button){ finish(); }
+
+    public void onClickJouerMonstre(View button){
+        //Intent intent = new Intent(this,gameplayActivity.class);
+        //startActivity(intent);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
