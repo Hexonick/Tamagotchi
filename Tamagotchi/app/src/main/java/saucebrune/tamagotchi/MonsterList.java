@@ -31,8 +31,8 @@ public class MonsterList extends AppCompatActivity{
     public void onClickRetour(View button){ finish(); }
 
     public void onClickJouerMonstre(View button){
-        //Intent intent = new Intent(this,gameplayActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this,gameplayActivity.class);
+        startActivity(intent);
     }
 
     @Override

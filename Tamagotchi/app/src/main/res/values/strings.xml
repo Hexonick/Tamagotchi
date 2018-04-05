@@ -23,4 +23,5 @@
     <string name="txtMonstre2">Monstre 2</string>
     <string name="txtMonstre3">Monstre 3</string>
     <string name="txtMonstre4">Monstre 4</string>
+    <string name="txtExp">0</string>
 </resources>
