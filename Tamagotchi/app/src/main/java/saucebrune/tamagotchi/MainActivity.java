@@ -86,4 +86,13 @@ public class MainActivity extends AppCompatActivity {
         stopService(serviceIntent);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
