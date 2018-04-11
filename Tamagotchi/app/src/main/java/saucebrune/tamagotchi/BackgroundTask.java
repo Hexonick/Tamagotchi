@@ -1,26 +1,19 @@
 package saucebrune.tamagotchi;
 
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.widget.TextView;
+
+import static saucebrune.tamagotchi.MainActivity.expMonstre;
+import static saucebrune.tamagotchi.MainActivity.gainExp;
+import static saucebrune.tamagotchi.MainActivity.speed;
 
 public class BackgroundTask extends AsyncTask<TextView,Integer,Void>{
     private boolean sorti = false;
     private TextView txtExpMonstre1 = null;
-    private int[] expMonstre = new int[4];
-    private int[] speed = new int[4];
-    private int[] gainExp = new int[4];
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //A enlever apres initialisation avec la BD
-        for(int i = 0; i<4;i++){
-            expMonstre[i] = -1;
-            speed[i] = 3000;
-            gainExp[i] = 1;
-        }
-        //-----------------------------------------
         sorti = true;
     }
 
@@ -42,7 +35,7 @@ public class BackgroundTask extends AsyncTask<TextView,Integer,Void>{
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        txtExpMonstre1.setText(String.valueOf(expMonstre[0]));
+        txtExpMonstre1.setText(values[0]);
     }
 
     @Override

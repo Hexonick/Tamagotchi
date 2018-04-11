@@ -8,6 +8,10 @@ import android.support.annotation.Nullable;
 
 import org.w3c.dom.Text;
 
+import static saucebrune.tamagotchi.MainActivity.expMonstre;
+import static saucebrune.tamagotchi.MainActivity.gainExp;
+import static saucebrune.tamagotchi.MainActivity.speed;
+
 public class ServiceActivity extends Service {
 
     private IBinder monBinder;
@@ -25,7 +29,12 @@ public class ServiceActivity extends Service {
             @Override
             public void run() {
                 while(sorti){
-
+                    expMonstre[0]+= gainExp[0];
+                    try {
+                        Thread.sleep(speed[0]);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();

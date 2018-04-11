@@ -1,21 +1,37 @@
 package saucebrune.tamagotchi;
 
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String[] nomMonstre = new String[4];
+    public static int nivAccount;
+    public static int[] tempsVivant = new int[4];
+    public static int[] nivMonstre = new int[4];
+    public static int[] expMonstre = new int[4];
+    public static int[] speed = new int[4];
+    public static int[] gainExp = new int[4];
+    public static int tempsOnDestroy;
+
+    public static ServiceActivity srvActivity;
+    public static BackgroundTask asyncActivity;
+    public static boolean boolSrvActivity;
+    public static boolean boolAsyncActivity;
 
     private static final int REQUEST_CODE = 1;
     private ServiceConnection monServiceConnection;
@@ -34,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickLogin(View button){
         Intent login = new Intent(this,LoginActivity.class);
+        init();
         startActivityForResult(login, REQUEST_CODE);
     }
 
@@ -58,6 +75,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void init(){
+        for(int i = 0; i<4;i++){
+            gainExp[i] = 1;
+            tempsVivant[i] = 0;
+            nomMonstre[i] = "";
+            expMonstre[i] = -1;
+            nivMonstre[i] = 0;
+            speed[i] = 3000;
+        }
+        nivAccount = 0;
+        tempsOnDestroy = 0;
+        boolAsyncActivity = true;
+        boolSrvActivity = false;
+        asyncActivity = new BackgroundTask();
+        srvActivity = new ServiceActivity();
+    }
+
     //Fonction relier au service
     //--------------------------------------------------------
 
@@ -76,23 +110,29 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    public void demarrerService(View view) {
+    public void demarrerService() {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         startService(serviceIntent);
     }
 
-    public void arreterService(View view) {
+    public void arreterService() {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         stopService(serviceIntent);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
+        String givenDateString = String.valueOf(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        try {
+            Date mDate = sdf.parse(givenDateString);
+            long timeInMilliseconds = mDate.getTime();
+            tempsOnDestroy = (int)(long)(timeInMilliseconds / 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolSrvActivity = true;
+        demarrerService();
     }
 }
