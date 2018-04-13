@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import org.w3c.dom.Text;
+import static saucebrune.tamagotchi.MainActivity.accountData;
 
 public class ServiceActivity extends Service {
 
@@ -25,7 +25,12 @@ public class ServiceActivity extends Service {
             @Override
             public void run() {
                 while(sorti){
-
+                    accountData.setExpMonsre(accountData.getExpMonstre(0) + accountData.getGainExp(0),0);
+                    try {
+                        Thread.sleep(accountData.getSpeed(0));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();
@@ -34,14 +39,10 @@ public class ServiceActivity extends Service {
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
-        return monBinder;
-    }
+    public IBinder onBind(Intent intent) { return monBinder; }
 
     @Override
-    public boolean onUnbind(Intent intent){
-        return false;
-    }
+    public boolean onUnbind(Intent intent){ return false; }
 
     public class MonBinderDActivite extends Binder{
         ServiceActivity getMonService(){

@@ -1,17 +1,14 @@
 package saucebrune.tamagotchi;
 
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -20,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private ServiceConnection monServiceConnection;
     private ServiceActivity monService;
+    static AccountData accountData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                accountData = AccountData.getInstance();
                 String info = data.getStringExtra("etxtPseudo");
+                accountData.setPseudo(info);
                 TextView pseudo = (TextView) findViewById(R.id.txtPseudo);
                 Button btnJouer = (Button)findViewById(R.id.btnJouer);
                 btnJouer.setEnabled(true);
                 pseudo.setAlpha(1);
-                pseudo.setText(info);
+                pseudo.setText(accountData.getPseudo());
             }
         }
     }
@@ -76,23 +76,13 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    public void demarrerService(View view) {
+    public void demarrerService() {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         startService(serviceIntent);
     }
 
-    public void arreterService(View view) {
+    public void arreterService() {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         stopService(serviceIntent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

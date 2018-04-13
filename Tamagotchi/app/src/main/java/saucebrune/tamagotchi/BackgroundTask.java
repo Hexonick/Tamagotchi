@@ -1,37 +1,29 @@
 package saucebrune.tamagotchi;
 
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.widget.TextView;
+
+import static saucebrune.tamagotchi.MainActivity.accountData;
 
 public class BackgroundTask extends AsyncTask<TextView,Integer,Void>{
     private boolean sorti = false;
     private TextView txtExpMonstre1 = null;
-    private int[] expMonstre = new int[4];
-    private int[] speed = new int[4];
-    private int[] gainExp = new int[4];
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //A enlever apres initialisation avec la BD
-        for(int i = 0; i<4;i++){
-            expMonstre[i] = -1;
-            speed[i] = 3000;
-            gainExp[i] = 1;
-        }
-        //-----------------------------------------
         sorti = true;
     }
 
     @Override
     protected Void doInBackground(TextView... params) {
         txtExpMonstre1 = params[0];
+        //Creer un switch avec le textview pour aller chercher le id
         while(sorti){
-            expMonstre[0] += gainExp[0]; //Gain d'expérience
-            publishProgress(expMonstre[0]);
+            accountData.setExpMonsre(accountData.getExpMonstre(0) + accountData.getGainExp(0),0);
+            publishProgress(accountData.getExpMonstre(0));
             try {
-                Thread.sleep(speed[0]);
+                Thread.sleep(accountData.getSpeed(0));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -42,7 +34,7 @@ public class BackgroundTask extends AsyncTask<TextView,Integer,Void>{
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        txtExpMonstre1.setText(String.valueOf(expMonstre[0]));
+        txtExpMonstre1.setText(String.valueOf(accountData.getExpMonstre(0)));
     }
 
     @Override
