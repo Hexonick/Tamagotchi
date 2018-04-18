@@ -11,8 +11,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String[] nomMonstre = new String[4];
+    public static int nivAccount;
+    public static int[] tempsVivant = new int[4];
+    public static int[] nivMonstre = new int[4];
+    public static int[] expMonstre = new int[4];
+    public static int[] speed = new int[4];
+    public static int[] gainExp = new int[4];
+    public static int tempsOnDestroy;
+
+    public static ServiceActivity srvActivity;
+    public static BackgroundTask asyncActivity;
+    public static boolean boolSrvActivity;
+    public static boolean boolAsyncActivity;
 
     private static final int REQUEST_CODE = 1;
     private ServiceConnection monServiceConnection;
@@ -32,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickLogin(View button){
         Intent login = new Intent(this,LoginActivity.class);
+        init();
         startActivityForResult(login, REQUEST_CODE);
     }
 
@@ -56,6 +76,23 @@ public class MainActivity extends AppCompatActivity {
                 pseudo.setText(accountData.getPseudo());
             }
         }
+    }
+
+    private void init(){
+        for(int i = 0; i<4;i++){
+            gainExp[i] = 1;
+            tempsVivant[i] = 0;
+            nomMonstre[i] = "";
+            expMonstre[i] = -1;
+            nivMonstre[i] = 0;
+            speed[i] = 3000;
+        }
+        nivAccount = 0;
+        tempsOnDestroy = 0;
+        boolAsyncActivity = true;
+        boolSrvActivity = false;
+        asyncActivity = new BackgroundTask();
+        srvActivity = new ServiceActivity();
     }
 
     //Fonction relier au service
@@ -84,5 +121,19 @@ public class MainActivity extends AppCompatActivity {
     public void arreterService() {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         stopService(serviceIntent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String givenDateString = String.valueOf(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        try {
+            Date mDate = sdf.parse(givenDateString);
+            long timeInMilliseconds = mDate.getTime();
+            tempsOnDestroy = (int)(long)(timeInMilliseconds / 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

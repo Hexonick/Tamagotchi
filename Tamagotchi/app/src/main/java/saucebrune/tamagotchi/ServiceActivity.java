@@ -8,6 +8,10 @@ import android.support.annotation.Nullable;
 
 import static saucebrune.tamagotchi.MainActivity.accountData;
 
+import static saucebrune.tamagotchi.MainActivity.expMonstre;
+import static saucebrune.tamagotchi.MainActivity.gainExp;
+import static saucebrune.tamagotchi.MainActivity.speed;
+
 public class ServiceActivity extends Service {
 
     private IBinder monBinder;
