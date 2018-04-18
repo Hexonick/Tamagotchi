@@ -122,18 +122,4 @@ public class MainActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         stopService(serviceIntent);
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        String givenDateString = String.valueOf(Calendar.getInstance().getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-        try {
-            Date mDate = sdf.parse(givenDateString);
-            long timeInMilliseconds = mDate.getTime();
-            tempsOnDestroy = (int)(long)(timeInMilliseconds / 1000);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }
