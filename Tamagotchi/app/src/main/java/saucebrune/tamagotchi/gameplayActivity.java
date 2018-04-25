@@ -23,7 +23,7 @@ public class gameplayActivity extends Activity{
             boolSrvActivity = false;
         }
         int[] values = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
-        accountData.setExpMonsre(values[myDB.selectId(accountData.getPseudo()) - 1],myDB.selectId(accountData.getPseudo())-1);
+        accountData.setExpMonsre(values[myDB.selectId(accountData.getPseudo())-1],myDB.selectId(accountData.getPseudo())-1);
         TextView view = (TextView)findViewById(R.id.txtExp);
         if(firstTime){ backTask = new BackgroundTask();
         firstTime = false;}
@@ -35,6 +35,7 @@ public class gameplayActivity extends Activity{
     @Override
     protected void onStop() {
         super.onStop();
+        backTask.onCancelled();
         myDB.updateExpMonstre(accountData.getExpMonstre(myDB.selectId(accountData.getPseudo())),accountData.getNomMonstre(myDB.selectId(accountData.getPseudo())));
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         startService(serviceIntent);

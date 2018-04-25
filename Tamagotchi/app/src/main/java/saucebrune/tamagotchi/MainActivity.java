@@ -13,10 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static ServiceActivity srvActivity;
-    public static BackgroundTask asyncActivity;
     public static boolean boolSrvActivity;
-    public static boolean boolAsyncActivity;
     public static DatabaseHelper myDB;
 
     private static final int REQUEST_CODE = 1;
@@ -66,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        boolAsyncActivity = true;
         boolSrvActivity = false;
-        asyncActivity = new BackgroundTask();
-        srvActivity = new ServiceActivity();
     }
 
     //Fonction relier au service

@@ -41,6 +41,5 @@ public class BackgroundTask extends AsyncTask<TextView,Integer,Void>{
     protected void onCancelled() {
         super.onCancelled();
         sorti = false;
-        //Ajouter les valeurs dans la BD
     }
 }

@@ -41,24 +41,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_Account + "(" +
-                idAccount + " INT NOT NULL AUTO_INCREMENT," +
-                pseudo + " VARCHAR(255)," +
-                pass + " VARCHAR(255)," +
-                expTotal + " INT," +
-                nivAcc + " INT," +
-                speed + " INT," +
-                gainExp + " INT," +
-                "PRIMARY KEY (" + idAccount + "));");
+        db.execSQL("CREATE TABLE " + TABLE_Account + "(" +
+                idAccount + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                pseudo + " TEXT," +
+                pass + " TEXT," +
+                expTotal + " INTEGER," +
+                nivAcc + " INTEGER," +
+                speed + " INTEGER," +
+                gainExp + " INTEGER);");
 
-        db.execSQL("create table " + TABLE_Monstre + "(" +
-                idMonstre + " INT NOT NULL AUTO_INCREMENT," +
-                nomMonstre + " VARCHAR(255)," +
-                expMonstre + " INT," +
-                nivMonstre + " INT," +
-                tempsVivant + " INT," +
-                idAccount + "Acc INT," +
-                "PRIMARY KEY (" + idMonstre + ")," +
+        db.execSQL("CREATE TABLE " + TABLE_Monstre + "(" +
+                idMonstre + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                nomMonstre + " TEXT," +
+                expMonstre + " INTEGER," +
+                nivMonstre + " INTEGER," +
+                tempsVivant + " INTEGER," +
+                idAccount + "Acc INTEGER," +
                 "FOREIGN KEY (" + idAccount + ") REFERENCES " + TABLE_Account + "(" + idAccount + "));");
     }
 
@@ -69,27 +67,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public void insertIntoTblAccount(String nom, String passW, int expT, int niv, int vitesse, int gain){
-        dataB.execSQL("INSERT INTO tblMonstre (" + pseudo + "," + pass + "," + expTotal + "," + nivAcc + "," + speed + "," + gainExp + ")" +
-                " VALUES ("+ nom + "," + passW + "," + expT + "," + niv + "," + vitesse + "," + gain + ")");
+        dataB.execSQL("INSERT INTO tblAccount (" + pseudo + "," + pass + "," + expTotal + "," + nivAcc + "," + speed + "," + gainExp + ")" +
+                " VALUES (\"" + nom + "\",\"" + passW + "\"," + expT + "," + niv + "," + vitesse + "," + gain + ")");
     }
 
     public void insertIntoTblMonstre(String nom, int exp, int niv, int temps, int id){
         dataB.execSQL("INSERT INTO tblMonstre (" + nomMonstre + "," + expMonstre + "," + nivMonstre + "," + tempsVivant + "," + idAccount + "Acc" + ")" +
-                " VALUES ("+ nom + "," + exp + "," + niv + "," + temps + "," + id + ")");
+                " VALUES (\"" + nom + "\"," + exp + "," + niv + "," + temps + "," + id + ")");
     }
 
     public void updateNomMonstre(String NewName, String OldName){
-        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + nomMonstre + " = " + NewName + " WHERE " + nomMonstre + " = " + OldName + ";");
+        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + nomMonstre + " = " + NewName + " WHERE " + nomMonstre + " = \"" + OldName + "\";");
     }
 
     public void updateExpMonstre(int exp, String name){
-        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + nomMonstre + " = " + name + ";");
+        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + nomMonstre + " = \"" + name + "\";");
     }
 
     public int selectId(String nom){
         ArrayList<Integer> values = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + idAccount + " FROM " + TABLE_Account + " WHERE " + pseudo + " = " + nom, null);
+        Cursor cursor = db.rawQuery("SELECT " + idAccount + " FROM " + TABLE_Account + " WHERE " + pseudo + " = \"" + nom + "\"", null);
 
         int info = 0;
         if(cursor.moveToFirst()) {

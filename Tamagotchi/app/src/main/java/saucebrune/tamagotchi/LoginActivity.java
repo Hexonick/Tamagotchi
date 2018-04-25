@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import static saucebrune.tamagotchi.MainActivity.myDB;
 
 public class LoginActivity extends Activity{
 
-    //private static final int REQUEST_CODE = 1;
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,20 +22,27 @@ public class LoginActivity extends Activity{
     }
 
     public void onClickLogin(View button){
-        EditText pseudo = (EditText)findViewById(R.id.etxtPseudo);
-        EditText password = (EditText)findViewById(R.id.etxtPassword);
-        int id = myDB.selectId(pseudo.getText().toString());
-        int[] info = myDB.selectExpMonstre(id);
-        if(checkPseudo(pseudo.getText().toString())&&checkPass(password.getText().toString())){
-            accountData.setPseudo(myDB.selectPseudo(id));
-            accountData.setPassword(myDB.selectPassword(id));
-            accountData.setNomMonsre(myDB.selectNomMonstre(id),id - 1);
-            accountData.setExpMonsre(info[id],id - 1);
-            Intent login = new Intent(this,MainActivity.class);
-            login.putExtra("etxtPseudo",accountData.getPseudo());
-            login.putExtra("etxtPassword",accountData.getPassword());
-            setResult(Activity.RESULT_CANCELED,login);
-            finish();
+        try{
+            EditText pseudo = (EditText)findViewById(R.id.etxtPseudo);
+            EditText password = (EditText)findViewById(R.id.etxtPassword);
+            int id = myDB.selectId(pseudo.getText().toString());
+            int[] info = myDB.selectExpMonstre(id);
+            if(checkPseudo(pseudo.getText().toString())&&checkPass(password.getText().toString())){
+                accountData.setPseudo(myDB.selectPseudo(id));
+                accountData.setPassword(myDB.selectPassword(id));
+                accountData.setNomMonsre(myDB.selectNomMonstre(id),id-1);
+                accountData.setExpMonsre(info[id],id-1);
+                Intent login = new Intent(this,MainActivity.class);
+                login.putExtra("etxtPseudo",accountData.getPseudo());
+                login.putExtra("etxtPassword",accountData.getPassword());
+                setResult(Activity.RESULT_CANCELED,login);
+                finish();
+            }
+        }catch (Exception e){
+            CharSequence text = "Aucun utilisateur ne correspond aux données entrées!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
         }
     }
 
@@ -67,19 +75,27 @@ public class LoginActivity extends Activity{
     }
 
     public boolean checkPseudo(String nom){
-        ArrayList<String> info = myDB.selectPseudo();
-        for(String s : info){
-            if(nom .compareToIgnoreCase(s)== 0)
-                return false;
+        try{
+            ArrayList<String> info = myDB.selectPseudo();
+            for(String s : info){
+                if(nom .compareToIgnoreCase(s)== 0)
+                    return false;
+            }
+        }catch(Exception e){
+            return false;
         }
         return true;
     }
 
     public boolean checkPass(String pass){
-        ArrayList<String> info = myDB.selectPassword();
-        for(String s : info){
-            if(pass .compareToIgnoreCase(s)== 0)
-                return false;
+        try{
+            ArrayList<String> info = myDB.selectPassword();
+            for(String s : info){
+                if(pass .compareToIgnoreCase(s)== 0)
+                    return false;
+            }
+        }catch(Exception e){
+            return false;
         }
         return true;
     }
