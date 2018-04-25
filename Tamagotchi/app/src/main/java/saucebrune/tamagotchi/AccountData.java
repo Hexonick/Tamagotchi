@@ -10,7 +10,7 @@ public class AccountData extends Application{
     private int nivAccount = 0;
     private int[] tempsVivant = {0,0,0,0};
     private int[] nivMonstre = {0,0,0,0};
-    private int[] expMonstre  = {-1,-1,-1,-1};
+    private int[] expMonstre  = {0,0,0,0};
     private int[] speed = {3000,3000,3000,3000};
     private int[] gainExp = {1,1,1,1};
 
