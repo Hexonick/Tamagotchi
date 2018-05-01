@@ -13,32 +13,34 @@ import static saucebrune.tamagotchi.MainActivity.myDB;
 public class gameplayActivity extends Activity{
     private boolean firstTime = true;
     public BackgroundTask backTask = null;
+    MainActivity main = new MainActivity();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameplay_activity);
         if(boolSrvActivity){
-            Intent serviceIntent = new Intent(this, ServiceActivity.class);
-            stopService(serviceIntent);
+            main.arreterService();
             boolSrvActivity = false;
         }
         int[] values = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
-        accountData.setExpMonsre(values[myDB.selectId(accountData.getPseudo())-1],myDB.selectId(accountData.getPseudo())-1);
+        accountData.setExpMonsre(values[0],0);
+        //accountData.setExpMonsre(values[myDB.selectId(accountData.getPseudo())-1],myDB.selectId(accountData.getPseudo())-1);
         TextView view = (TextView)findViewById(R.id.txtExp);
         if(firstTime){ backTask = new BackgroundTask();
         firstTime = false;}
         backTask.execute(view);
     }
 
-    public void onClickRetour(View view){ finish();}
+    public void onClickRetour(View view){
+        backTask.onCancelled();
+        myDB.updateExpMonstre(0,accountData.getNomMonstre(0));
+        finish();
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
-        backTask.onCancelled();
-        myDB.updateExpMonstre(accountData.getExpMonstre(myDB.selectId(accountData.getPseudo())),accountData.getNomMonstre(myDB.selectId(accountData.getPseudo())));
-        Intent serviceIntent = new Intent(this, ServiceActivity.class);
-        startService(serviceIntent);
+        main.demarrerService();
         boolSrvActivity = true;
     }
 }

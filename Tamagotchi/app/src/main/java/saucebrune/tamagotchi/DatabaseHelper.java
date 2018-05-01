@@ -37,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private DatabaseHelper(Context context) {
         super(context, "dbTamagotchi", null, 1);
         dataB = this.getWritableDatabase();
+        dataB.execSQL("PRAGMA foreign_keys=ON;");
     }
 
     @Override
@@ -56,8 +57,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 expMonstre + " INTEGER," +
                 nivMonstre + " INTEGER," +
                 tempsVivant + " INTEGER," +
+                idAccount + "Acc INTEGER);");
+
+        /*db.execSQL("CREATE TABLE " + TABLE_Monstre + "(" +
+                idMonstre + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                nomMonstre + " TEXT," +
+                expMonstre + " INTEGER," +
+                nivMonstre + " INTEGER," +
+                tempsVivant + " INTEGER," +
                 idAccount + "Acc INTEGER," +
-                "FOREIGN KEY (" + idAccount + ") REFERENCES " + TABLE_Account + "(" + idAccount + "));");
+                "FOREIGN KEY (" + idAccount + "Acc) REFERENCES " + TABLE_Account + "(" + idAccount + "));");*/
     }
 
     @Override
@@ -67,27 +76,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public void insertIntoTblAccount(String nom, String passW, int expT, int niv, int vitesse, int gain){
-        dataB.execSQL("INSERT INTO tblAccount (" + pseudo + "," + pass + "," + expTotal + "," + nivAcc + "," + speed + "," + gainExp + ")" +
-                " VALUES (\"" + nom + "\",\"" + passW + "\"," + expT + "," + niv + "," + vitesse + "," + gain + ")");
+        dataB.execSQL("INSERT INTO " + TABLE_Account + " (" + pseudo + "," + pass + "," + expTotal + "," + nivAcc + "," + speed + "," + gainExp + ")" +
+                " VALUES (\'" + nom + "\',\'" + passW + "\'," + expT + "," + niv + "," + vitesse + "," + gain + ")");
     }
 
     public void insertIntoTblMonstre(String nom, int exp, int niv, int temps, int id){
-        dataB.execSQL("INSERT INTO tblMonstre (" + nomMonstre + "," + expMonstre + "," + nivMonstre + "," + tempsVivant + "," + idAccount + "Acc" + ")" +
-                " VALUES (\"" + nom + "\"," + exp + "," + niv + "," + temps + "," + id + ")");
+        dataB.execSQL("INSERT INTO " + TABLE_Monstre + " (" + nomMonstre + "," + expMonstre + "," + nivMonstre + "," + tempsVivant + "," + idAccount + "Acc" + ")" +
+                " VALUES (\'" + nom + "\'," + exp + "," + niv + "," + temps + "," + id + ")");
     }
 
     public void updateNomMonstre(String NewName, String OldName){
-        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + nomMonstre + " = " + NewName + " WHERE " + nomMonstre + " = \"" + OldName + "\";");
+        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + nomMonstre + " = \'" + NewName + "\' WHERE " + nomMonstre + " = \'" + OldName + "\';");
     }
 
     public void updateExpMonstre(int exp, String name){
-        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + nomMonstre + " = \"" + name + "\";");
+        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + nomMonstre + " = \'" + name + "\';");
     }
 
     public int selectId(String nom){
         ArrayList<Integer> values = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + idAccount + " FROM " + TABLE_Account + " WHERE " + pseudo + " = \"" + nom + "\"", null);
+        Cursor cursor = db.rawQuery("SELECT " + idAccount + " FROM " + TABLE_Account + " WHERE " + pseudo + " = \'" + nom + "\'", null);
 
         int info = 0;
         if(cursor.moveToFirst()) {
@@ -157,7 +166,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values = cursor.getString(cursor.getColumnIndex(pass));
             }while(cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
         return values;

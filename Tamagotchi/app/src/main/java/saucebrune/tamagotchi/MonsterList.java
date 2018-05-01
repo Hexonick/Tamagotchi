@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import static saucebrune.tamagotchi.MainActivity.accountData;
+import static saucebrune.tamagotchi.MainActivity.myDB;
+
 public class MonsterList extends AppCompatActivity{
     private static final int REQUEST_CODE = 1;
 
@@ -66,6 +69,8 @@ public class MonsterList extends AppCompatActivity{
                 nomMonstre.setText(nom);
                 btnJouer.setVisibility(View.GONE);
                 table.setVisibility(View.VISIBLE);
+                int[] niv = accountData.getNivMonstre();
+                myDB.insertIntoTblMonstre(nom,accountData.getExpMonstre(0),niv[0],0,myDB.selectId(accountData.getPseudo()));
             }
         }
     }
