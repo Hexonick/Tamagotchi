@@ -13,13 +13,13 @@ import static saucebrune.tamagotchi.MainActivity.myDB;
 public class gameplayActivity extends Activity{
     private boolean firstTime = true;
     public BackgroundTask backTask = null;
-    MainActivity main = new MainActivity();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameplay_activity);
         if(boolSrvActivity){
-            main.arreterService();
+            Intent serviceIntent = new Intent(this, ServiceActivity.class);
+            stopService(serviceIntent);
             boolSrvActivity = false;
         }
         int[] values = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
@@ -32,9 +32,12 @@ public class gameplayActivity extends Activity{
     }
 
     public void onClickRetour(View view){
-        myDB.updateExpMonstre(0,accountData.getNomMonstre(0));
+        myDB.updateExpMonstre(accountData.getExpMonstre(0),accountData.getNomMonstre(0));
+        int[] exp = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
+        accountData.setExpMonsre(exp[0],0);
         backTask.onCancelled();
-        main.demarrerService();
+        Intent serviceIntent = new Intent(this, ServiceActivity.class);
+        startService(serviceIntent);
         boolSrvActivity = true;
         finish();
     }

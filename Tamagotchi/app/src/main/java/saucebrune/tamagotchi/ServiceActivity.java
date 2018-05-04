@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import static saucebrune.tamagotchi.MainActivity.accountData;
+import static saucebrune.tamagotchi.MainActivity.myDB;
 
 public class ServiceActivity extends Service {
 
@@ -52,5 +53,6 @@ public class ServiceActivity extends Service {
 
     public void stopRun(){
         sorti = false;
+        myDB.updateExpMonstre(accountData.getExpMonstre(0),accountData.getNomMonstre(0));
     }
 }
