@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private DatabaseHelper(Context context) {
-        super(context, "dbTamagotchi", null, 1);
+        super(context, "dbTamagotchi2", null, 1);
         dataB = this.getWritableDatabase();
         dataB.execSQL("PRAGMA foreign_keys=ON;");
     }
@@ -104,9 +104,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 info = cursor.getInt(cursor.getColumnIndex(idAccount));
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return info;
     }
 
@@ -120,9 +117,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values.add(cursor.getString(cursor.getColumnIndex(pseudo)));
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return values;
     }
 
@@ -135,9 +129,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values = cursor.getString(cursor.getColumnIndex(pseudo));
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return values;
     }
 
@@ -151,9 +142,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values.add(cursor.getString(cursor.getColumnIndex(pass)));
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return values;
     }
 
@@ -166,8 +154,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values = cursor.getString(cursor.getColumnIndex(pass));
             }while(cursor.moveToNext());
         }
-        cursor.close();
-        db.close();
         return values;
     }
 
@@ -181,9 +167,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values = cursor.getString(cursor.getColumnIndex(nomMonstre));
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return values;
     }
 
@@ -198,9 +181,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 i++;
             }while(cursor.moveToNext());
         }
-
-        cursor.close();
-        db.close();
         return values;
     }
 }

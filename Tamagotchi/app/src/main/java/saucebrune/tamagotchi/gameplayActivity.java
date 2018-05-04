@@ -32,15 +32,10 @@ public class gameplayActivity extends Activity{
     }
 
     public void onClickRetour(View view){
-        backTask.onCancelled();
         myDB.updateExpMonstre(0,accountData.getNomMonstre(0));
-        finish();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+        backTask.onCancelled();
         main.demarrerService();
         boolSrvActivity = true;
+        finish();
     }
 }
