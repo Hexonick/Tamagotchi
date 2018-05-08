@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import static saucebrune.tamagotchi.MainActivity.accountData;
 import static saucebrune.tamagotchi.MainActivity.boolSrvActivity;
+import static saucebrune.tamagotchi.MainActivity.monService;
 import static saucebrune.tamagotchi.MainActivity.myDB;
 
 public class gameplayActivity extends Activity{
@@ -18,13 +19,14 @@ public class gameplayActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameplay_activity);
         if(boolSrvActivity){
-            Intent serviceIntent = new Intent(this, ServiceActivity.class);
-            stopService(serviceIntent);
+            monService.stopRun();
             boolSrvActivity = false;
         }
         int[] values = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
+        int val = values[0];
         accountData.setExpMonsre(values[0],0);
-        //accountData.setExpMonsre(values[myDB.selectId(accountData.getPseudo())-1],myDB.selectId(accountData.getPseudo())-1);
+        TextView monstre = (TextView)findViewById(R.id.txtMonstre1);
+        monstre.setText(myDB.selectNomMonstre(myDB.selectId(accountData.getPseudo())));
         TextView view = (TextView)findViewById(R.id.txtExp);
         if(firstTime){ backTask = new BackgroundTask();
         firstTime = false;}
@@ -32,9 +34,7 @@ public class gameplayActivity extends Activity{
     }
 
     public void onClickRetour(View view){
-        myDB.updateExpMonstre(accountData.getExpMonstre(0),accountData.getNomMonstre(0));
-        int[] exp = myDB.selectExpMonstre(myDB.selectId(accountData.getPseudo()));
-        accountData.setExpMonsre(exp[0],0);
+        myDB.updateExpMonstre(accountData.getExpMonstre(0),myDB.selectId(accountData.getPseudo()));
         backTask.onCancelled();
         Intent serviceIntent = new Intent(this, ServiceActivity.class);
         startService(serviceIntent);

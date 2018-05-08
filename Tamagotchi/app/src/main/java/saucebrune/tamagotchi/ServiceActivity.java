@@ -17,6 +17,7 @@ public class ServiceActivity extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        sorti = true;
         monBinder = new MonBinderDActivite();
     }
 
@@ -51,8 +52,11 @@ public class ServiceActivity extends Service {
         }
     }
 
+    @Override
+    public void onDestroy() { super.onDestroy(); }
+
     public void stopRun(){
         sorti = false;
-        myDB.updateExpMonstre(accountData.getExpMonstre(0),accountData.getNomMonstre(0));
+        myDB.updateExpMonstre(accountData.getExpMonstre(0),myDB.selectId(accountData.getPseudo()));
     }
 }

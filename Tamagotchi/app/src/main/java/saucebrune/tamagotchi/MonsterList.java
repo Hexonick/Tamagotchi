@@ -18,6 +18,15 @@ public class MonsterList extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.monsterlist_activity);
+        String nom = myDB.selectNomMonstre(myDB.selectId(accountData.getPseudo()));
+        if(!"".equals(nom)){
+            TextView nomMonstre = (TextView) findViewById(R.id.nomMonstre1);
+            TableLayout table = (TableLayout) findViewById(R.id.tblMonstre1);
+            Button btnJouer = (Button)findViewById(R.id.btnMonster1);
+            nomMonstre.setText(nom);
+            btnJouer.setVisibility(View.GONE);
+            table.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onClickChooseMonster(View button){
@@ -69,6 +78,7 @@ public class MonsterList extends AppCompatActivity{
                 nomMonstre.setText(nom);
                 btnJouer.setVisibility(View.GONE);
                 table.setVisibility(View.VISIBLE);
+                accountData.setNomMonsre(nom,0);
                 int[] niv = accountData.getNivMonstre();
                 myDB.insertIntoTblMonstre(nom,accountData.getExpMonstre(0),niv[0],0,myDB.selectId(accountData.getPseudo()));
             }

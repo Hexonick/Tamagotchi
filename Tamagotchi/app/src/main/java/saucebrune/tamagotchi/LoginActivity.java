@@ -65,7 +65,7 @@ public class LoginActivity extends Activity{
         try{
             pseudo = myDB.selectPseudo();
             for(String s : pseudo){
-                if(nom .compareToIgnoreCase(s) == 0)
+                if(nom.equalsIgnoreCase(s))
                     return false;
             }
         }catch (Exception e){
@@ -75,28 +75,20 @@ public class LoginActivity extends Activity{
     }
 
     public boolean checkPseudo(String nom){
-        try{
-            ArrayList<String> info = myDB.selectPseudo();
-            for(String s : info){
-                if(nom .compareToIgnoreCase(s)== 0)
-                    return false;
-            }
-        }catch(Exception e){
-            return false;
+        ArrayList<String> info = myDB.selectPseudo();
+        for(String s : info){
+            if(nom.equalsIgnoreCase(s))
+                return true;
         }
-        return true;
+        return false;
     }
 
     public boolean checkPass(String pass){
-        try{
-            ArrayList<String> info = myDB.selectPassword();
-            for(String s : info){
-                if(pass .compareToIgnoreCase(s)== 0)
-                    return false;
-            }
-        }catch(Exception e){
-            return false;
+        ArrayList<String> info = myDB.selectPassword();
+        for(String s : info){
+            if(pass.equalsIgnoreCase(s))
+                return true;
         }
-        return true;
+        return false;
     }
 }

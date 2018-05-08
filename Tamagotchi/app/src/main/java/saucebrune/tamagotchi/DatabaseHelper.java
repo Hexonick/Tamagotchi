@@ -89,8 +89,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + nomMonstre + " = \'" + NewName + "\' WHERE " + nomMonstre + " = \'" + OldName + "\';");
     }
 
-    public void updateExpMonstre(int exp, String name){
-        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + nomMonstre + " = \'" + name + "\';");
+    public void updateExpMonstre(int exp, int id){
+        dataB.execSQL("UPDATE " + TABLE_Monstre + " SET " + expMonstre + " = " + exp + " WHERE " + idAccount + "Acc = " + id + ";");
     }
 
     public int selectId(String nom){

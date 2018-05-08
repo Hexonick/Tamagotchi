@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
     private ServiceConnection monServiceConnection;
-    private ServiceActivity monService;
+    public static ServiceActivity monService;
     static AccountData accountData;
 
     @Override
